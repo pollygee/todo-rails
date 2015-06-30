@@ -1,5 +1,8 @@
 <h1><%= @list.name %></h1>
 
+<p>Add a task</p>
+<input type="text" data-list-id="<%= @list.id %>">
+
 <ul>
   <% @list.tasks.each do |task| %>
     <li class="task <%= if task.completed? then 'complete' else '' end %>" data-task-id="<%= task.id %>">

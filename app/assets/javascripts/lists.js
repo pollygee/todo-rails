@@ -18,4 +18,19 @@ $(document).on("ready", function(){
     })
   })
 
+  $("input").on("keyup", function(evt) {
+    if (evt.keyCode === 13) { // pressed enter
+      var list_id = $(this).data("list-id")
+
+      $.ajax("/lists/" + list_id + "/tasks", {
+        method: "POST",
+        data: {
+          task_name: $(this).val()
+        },
+        error: function() { alert("Error!") },
+        success: function() { alert("Success!") }
+      })
+    }
+  })
+
 })

@@ -1,10 +1,14 @@
 class TasksController < ApplicationController
-  skip_before_filter :verify_authenticity_token
-
   def complete
-    1/0
     task = Task.find params[:task_id]
     task.toggle_complete!
     render json: { status: :ok }
+  end
+
+  def create
+    # Task.new(content: params[:task_name], list_id: params[:list_id])
+    list = List.find params[:list_id]
+    task = list.tasks.create! content: params[:task_name]
+    render json: task
   end
 end
