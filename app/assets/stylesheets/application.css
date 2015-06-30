@@ -14,6 +14,10 @@
  *= require_self
  */
 
+.notice { 
+  border: 1px solid red;
+}
+
 li.task.complete {
   text-decoration: line-through;
 }
