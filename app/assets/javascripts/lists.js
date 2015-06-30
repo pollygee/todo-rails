@@ -28,7 +28,11 @@ $(document).on("ready", function(){
           task_name: $(this).val()
         },
         error: function() { alert("Error!") },
-        success: function() { alert("Success!") }
+        success: function(data) {
+          var new_item = $("<li class='task'>" + data.content + "</li>")
+
+          $("ul.task-list").append(new_item)
+        }
       })
     }
   })
