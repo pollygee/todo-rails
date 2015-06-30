@@ -7,7 +7,7 @@ $(document).on("ready", function(){
     $(".notice").show().text("Mistakes were made")
   }
 
-  $("li.task").on("click", function() {
+  var taskClickHandler = function() {
     $(this).toggleClass("complete")
 
     // $(this).attr("data-task-id")
@@ -18,7 +18,9 @@ $(document).on("ready", function(){
       method: "PATCH",
       error: errorHandler
     })
-  })
+  }
+
+  $("li.task").on("click", taskClickHandler)
 
   $("input").on("keyup", function(evt) {
     if (evt.keyCode === 13) { // pressed enter
@@ -31,7 +33,9 @@ $(document).on("ready", function(){
         },
         error: errorHandler,
         success: function(data) {
-          var new_item = $("<li class='task'>" + data.content + "</li>")
+          var new_item = $("<li class='task' data-task-id='" + data.id + "'>" + data.content + "</li>")
+
+          new_item.on("click", taskClickHandler)
 
           $("ul.task-list").append(new_item)
         }
