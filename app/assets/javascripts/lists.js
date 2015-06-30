@@ -3,6 +3,10 @@ $(document).on("ready", function(){
 
   $(".notice").hide()
 
+  var errorHandler = function() {
+    $(".notice").show().text("Mistakes were made")
+  }
+
   $("li.task").on("click", function() {
     $(this).toggleClass("complete")
 
@@ -12,9 +16,7 @@ $(document).on("ready", function(){
     // Note: don't actually care about list id here
     $.ajax("/lists/1/tasks/" + task_id + "/complete", {
       method: "PATCH",
-      error: function() {
-        $(".notice").show().text("Mistakes were made")
-      }
+      error: errorHandler
     })
   })
 
@@ -27,7 +29,7 @@ $(document).on("ready", function(){
         data: {
           task_name: $(this).val()
         },
-        error: function() { alert("Error!") },
+        error: errorHandler,
         success: function(data) {
           var new_item = $("<li class='task'>" + data.content + "</li>")
 
