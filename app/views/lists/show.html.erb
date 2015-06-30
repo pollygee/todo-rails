@@ -2,6 +2,8 @@
 
 <ul>
   <% @list.tasks.each do |task| %>
-    <li class="task"><%= task.content %></li>
+    <li class="task <%= if task.completed? then 'complete' else '' end %>">
+      <%= task.content %>
+    </li>
   <% end %>
 </ul>
