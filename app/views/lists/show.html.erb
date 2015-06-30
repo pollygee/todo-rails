@@ -2,7 +2,7 @@
 
 <ul>
   <% @list.tasks.each do |task| %>
-    <li class="task <%= if task.completed? then 'complete' else '' end %>">
+    <li class="task <%= if task.completed? then 'complete' else '' end %>" data-task-id="<%= task.id %>">
       <%= task.content %>
     </li>
   <% end %>
