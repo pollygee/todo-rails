@@ -22,14 +22,17 @@ $(document).on("ready", function(){
   $("li.task").on("click", taskClickHandler)
 
   $("button").on("click", (function() {
-    console.log(this)
+
     var task_id = $(this).data("task-id")
+    var parent = this.parentElement;
+    parent.parentElement.removeChild(parent)
+    // $("#task").remove()
     //console.log("/lists/1/tasks/" + task_id)
-    $parent("#task").remove();
+    
     // $.ajax("/lists/1/tasks/" + task_id, { 
     //   method: 'DELETE',
     //   error: errorHandler
-    //})
+    // })
   }))
 
   $("input").on("keyup", function(evt) {
