@@ -12,7 +12,6 @@ $(document).on("ready", function(){
 
     // $(this).attr("data-task-id")
     var task_id = $(this).data("task-id")
-
     // Note: don't actually care about list id here
     $.ajax("/lists/1/tasks/" + task_id + "/complete", {
       method: "PATCH",
@@ -21,6 +20,17 @@ $(document).on("ready", function(){
   }
 
   $("li.task").on("click", taskClickHandler)
+
+  $("button").on("click", (function() {
+    console.log(this)
+    var task_id = $(this).data("task-id")
+    //console.log("/lists/1/tasks/" + task_id)
+    $parent("#task").remove();
+    // $.ajax("/lists/1/tasks/" + task_id, { 
+    //   method: 'DELETE',
+    //   error: errorHandler
+    //})
+  }))
 
   $("input").on("keyup", function(evt) {
     if (evt.keyCode === 13) { // pressed enter
