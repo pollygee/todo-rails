@@ -23,16 +23,19 @@ $(document).on("ready", function(){
 
   $("button").on("click", (function() {
 
-    var task_id = $(this).data("task-id")
-    var parent = this.parentElement;
-    parent.parentElement.removeChild(parent)
-    // $("#task").remove()
-    //console.log("/lists/1/tasks/" + task_id)
+    var $parent = $(this).parent()
     
-    // $.ajax("/lists/1/tasks/" + task_id, { 
-    //   method: 'DELETE',
-    //   error: errorHandler
-    // })
+    console.log($parent)
+    var task_id = $parent.data("task-id")
+    
+    $parent.remove()
+    console.log("/lists/1/tasks/" + task_id)
+    
+    $.ajax("/lists/1/tasks/" + task_id, { 
+      method: 'DELETE',
+      error: errorHandler
+    })
+    ;
   }))
 
   $("input").on("keyup", function(evt) {

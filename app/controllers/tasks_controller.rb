@@ -11,4 +11,10 @@ class TasksController < ApplicationController
     task = list.tasks.create! content: params[:task_name]
     render json: task
   end
+
+  def destroy 
+    task = Task.find params[:id]
+    task.delete
+    render json: {status: :ok}
+  end
 end
