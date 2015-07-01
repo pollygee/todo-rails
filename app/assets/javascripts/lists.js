@@ -21,22 +21,24 @@ $(document).on("ready", function(){
 
   $("li.task").on("click", taskClickHandler)
 
-  $("button").on("click", (function() {
+  var deleteClickHandler =  function() {
 
-    var $parent = $(this).parent()
-    
-    console.log($parent)
-    var task_id = $parent.data("task-id")
-    
-    $parent.remove()
-    console.log("/lists/1/tasks/" + task_id)
-    
-    $.ajax("/lists/1/tasks/" + task_id, { 
-      method: 'DELETE',
-      error: errorHandler
-    })
-    ;
-  }))
+        var $parent = $(this).parent()
+        
+        console.log($parent)
+        var task_id = $parent.data("task-id")
+        
+        $parent.remove()
+        console.log("/lists/1/tasks/" + task_id)
+        
+        $.ajax("/lists/1/tasks/" + task_id, { 
+          method: 'DELETE',
+          error: errorHandler
+        })
+      }
+
+
+  $("button").on("click", deleteClickHandler)
 
   $("input").on("keyup", function(evt) {
     if (evt.keyCode === 13) { // pressed enter
@@ -49,11 +51,14 @@ $(document).on("ready", function(){
         },
         error: errorHandler,
         success: function(data) {
-          var new_item = $("<li class='task' data-task-id='" + data.id + "'>" + data.content + "</li>")
+          var $new_item = $("<li class='task' data-task-id='" + data.id + "'>" + data.content + "</li>")
 
-          new_item.on("click", taskClickHandler)
+          $new_item.on("click", taskClickHandler)
 
-          $("ul.task-list").append(new_item)
+
+          $("ul.task-list").append($new_item)
+          $new_item.append("<button type='button'>Delete</button>")
+          $new_item.find('button').on("click", deleteClickHandler)
         }
       })
     }
